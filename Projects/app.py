@@ -2,6 +2,12 @@ import streamlit as st
 import pickle
 import numpy as np
 from chatbot import get_chatbot_response
+user_question = st.text_input("Ask me anything:")
+
+if user_question:
+    response = get_chatbot_response(user_question)
+    st.text_area("Bot:", value=response, height=100)
+
 
 # Load models
 diabetes_model = pickle.load(open("models/diabetes_model.sav", "rb"))
