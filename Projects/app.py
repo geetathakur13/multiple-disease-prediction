@@ -48,20 +48,7 @@ models = {
     'lung_cancer': pickle.load(open('Projects/Models/lungs_disease_model.sav', 'rb')),
     'thyroid': pickle.load(open('Projects/Models/Thyroid_model.sav', 'rb'))
 }
-# Sidebar Menu
-with st.sidebar:
-    selected = option_menu(
-        menu_title="Disease Prediction",
-        options=["Diabetes Prediction", "Heart Disease Prediction", "Parkinsons Prediction", "Lung Cancer Prediction", "Hypo-Thyroid Prediction"],
-        icons=["activity", "heart", "person", "lungs", "medkit"],
-        default_index=0,
-        styles={
-            "container": {"padding": "5!important", "background-color": "#f0f2f5"},
-            "icon": {"color": "black", "font-size": "25px"},
-            "nav-link": {"font-size": "20px", "text-align": "left", "margin": "0px"},
-            "nav-link-selected": {"background-color": "#007bff"},
-        }
-    )
+
 # Dropdown for Disease Selection
 selected = st.selectbox(
     'Select a Disease to Predict',
@@ -79,8 +66,6 @@ def display_input(label, key, tooltip, type="text"):
     elif type == "number":
         return st.number_input(label, key=key, help=tooltip, step=1)
 
-# PREDICTION PAGES (unchanged, already added above)...
-
 # CHATBOT SECTION
 st.markdown("---")
 st.subheader("💬 Health Assistant Chatbot")
@@ -89,19 +74,26 @@ if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 
 user_input = st.text_input("Ask me anything about diseases, symptoms, or models...", key="chat_input")
+
 if user_input:
-    # Here you can plug in any logic or ML model
     response = f"You asked: '{user_input}'. I'm here to help you with your health queries! 🩺"
     
     # Append to history
     st.session_state.chat_history.append(("user", user_input))
     st.session_state.chat_history.append(("bot", response))
+    
+    # Reset the text input field after receiving input
+    st.text_input("Ask me anything about diseases, symptoms, or models...", value="", key="chat_input")
 
 # Display chat history
 for sender, msg in st.session_state.chat_history:
     message(msg, is_user=(sender == "user"))
 
-# Add a button to clear chat history
-if st.button("Clear Chat History"):
-    st.session_state.chat_history = []
-    st.experimental_rerun()  # Refresh the app to clear the chat history
+# CSS for white text
+st.markdown("""
+   <style>
+   .reportview-container .main .block-container {
+       color: white;
+   }
+   </style>
+""", unsafe_allow_html=True)
