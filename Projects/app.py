@@ -42,11 +42,11 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Load Models
 models = {
-    'diabetes': pickle.load(open('Models/diabetes_model.sav', 'rb')),
-    'heart_disease': pickle.load(open('Models/heart_disease_model.sav', 'rb')),
-    'parkinsons': pickle.load(open('Models/parkinsons_model.sav', 'rb')),
-    'lung_cancer': pickle.load(open('Models/lungs_disease_model.sav', 'rb')),
-    'thyroid': pickle.load(open('Models/Thyroid_model.sav', 'rb'))
+    'diabetes': pickle.load(open('Projects/Models/diabetes_model.sav', 'rb')),
+    'heart_disease': pickle.load(open('Projects/Models/heart_disease_model.sav', 'rb')),
+    'parkinsons': pickle.load(open('Projects/Models/parkinsons_model.sav', 'rb')),
+    'lung_cancer': pickle.load(open('Projects/Models/lungs_disease_model.sav', 'rb')),
+    'thyroid': pickle.load(open('Projects/Models/Thyroid_model.sav', 'rb'))
 }
 # Sidebar Menu
 with st.sidebar:
